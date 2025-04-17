@@ -22,6 +22,29 @@ const config = {
   tail: "default",  // TODO: Choose tail, see https://play.battlesnake.com/customizations/ for options unlocked in your account
 }
 
+// Respond to GET requests on "/"
+app.get('/', (req, res) => {
+  res.json(config);
+});
+
+// Respond to POST requests on "/start"
+app.post('/start', (req, res) => {
+  // You can add any start logic here
+  res.sendStatus(200);
+});
+
+// Respond to POST requests on "/move"
+app.post('/move', (req, res) => {
+  const moveResponse = move(req.body); // Ensure moveLogic.js exports a function that handles the move
+  res.json(moveResponse);
+});
+
+// Respond to POST requests on "/end"
+app.post('/end', (req, res) => {
+  // You can add any end-of-game logic here
+  res.sendStatus(200);
+});
+
 //TODO: respond to GET requests on "/" with the config object above
 
 //TODO: respond to POST requests on "/start". Your response itself is ignored, but must have status code "200"
